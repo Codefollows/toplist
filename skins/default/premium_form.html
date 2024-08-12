@@ -1,0 +1,144 @@
+<script>
+	window.VisioList = {	
+		ajax: async function(url, type = 'GET', dataObj = {}) {
+			
+			const method = type.toUpperCase();
+
+			let options = {
+				method: method,
+				headers: {
+					'Content-type': 'text/plain; charset=UTF-8'
+				}
+			};
+			
+			if (method === 'POST') {
+				
+				const dataString = Object.entries(dataObj).map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&');
+				
+				options.headers = {
+					'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				};
+				options.body = dataString;
+			}
+			
+			const response = await fetch(url, options);
+			
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			} 
+			
+			if (method === 'POST') {
+				return await response.json();
+			}
+			else {
+				return await response.text();
+			}
+		}
+	};
+	
+	document.addEventListener('DOMContentLoaded', () => {
+
+		const premium_form  = document.getElementById('premium-form');
+		const weeks         = document.getElementById('premium-weeks');	
+		const days          = document.getElementById('premium-days');
+		const regular_price = document.getElementById('premium-regular-price');
+		const discount      = document.getElementById('premium-discount');
+		const final_price   = document.getElementById('premium-final-price');
+			
+		weeks.addEventListener('input', async () => {
+						
+			await VisioList.ajax('{$list_url}/index.php?a=user_cpl&b=user_premium&check', 'POST', { weeks: weeks.value }).then(response => {
+						
+				days.value        = response.days;
+				regular_price.value = response.regular_price;
+				discount.value    = response.discount;
+				final_price.value = response.final_price;
+
+			}).catch(alert);
+		});
+		
+		premium_form.addEventListener('submit', e => {
+
+			if(!weeks.value || !check(weeks.value, '1234567890')) {
+
+				e.preventDefault();
+
+				alert ('Please select the amount of weeks you want to buy!');
+				weeks.focus();
+			}
+		});
+
+
+		function check(input, char_ck) {
+		
+			var ok = true;
+
+			for (var i = 0; i < input.length; i++) {
+			
+				var chr   = input.charAt(i);
+				var found = false;
+				
+				for (var j = 0; j < char_ck.length; j++) {
+				
+					if (chr == char_ck.charAt(j)) {
+						found = true;
+					}
+				}
+				
+				if (!found) {
+					ok = false;
+				}
+			}
+
+			return ok;
+		}
+	});
+</script>
+
+
+<form action="{$list_url}/index.php?a=user_cpl&amp;b=user_premium&u={$myusername}" method="post" name="premium" id="premium-form" role="form">
+
+	{$csrf_token}
+
+	<legend>{$lng->join_premium_input}</legend>
+	
+	<div class="row">
+		{$discounts}
+	</div>
+	
+	<div class="row">
+	  <div class="col">
+		<div class="form-group">
+		 <label for="premium-weeks">{$lng->g_premium_day_qty_input}</label>
+		 <input type="text" name="total_weeks" size="4" value="" id="premium-weeks" class="form-control">
+		</div>
+	  </div>
+	</div>
+
+	<legend>{$lng->join_premium_total}</legend>
+
+	<div class="row">
+		<div class="col-md-4">
+			<label for="premium-days">{$lng->g_premium_total_days_count}</label>
+			<input type="text" name="total_days" value="" id="premium-days" class="form-control" readonly>
+		</div>
+		<div class="col-md-4">
+			<label for="premium-discount">{$lng->g_line_discount}: (%)</label>
+			<input type="text" name="line_discount" value="" id="premium-discount" class="form-control" readonly>
+		</div>
+		<div class="col-md-4">
+			<label for="premium-regular-price">{$lng->g_premium_total_price} ({$currency_symbol})</label>
+			<input type="text" name="total_price" value="" id="premium-regular-price" class="form-control" readonly>
+		</div>
+	</div>
+
+	<div class="row my-3">
+		<div class="col">
+			<label for="premium-final-price"><strong>{$lng->g_premium_final_price} ({$currency_symbol})</strong></label>
+			<input type="text" name="final_price" value="" id="premium-final-price" class="form-control" readonly>
+		</div>
+	</div>
+
+
+	<button class="btn btn-primary my-3" name="submit" type="submit">{$lng->g_premium_buy_proceed}</button>
+</form>

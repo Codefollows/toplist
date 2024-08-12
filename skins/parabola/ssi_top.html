@@ -1,0 +1,15 @@
+<script language="javascript">
+function out(link,username) {
+     out_url = '{$list_url}/index.php?a=out&u=' + username+'&go=1';
+ 
+     link.href = out_url; // For browsers that don't support setAttribute 
+     link.setAttribute('href', out_url); 
+}
+</script>
+<table><tr><td>
+<center><b>{$lng->ssi_top}</b></center>
+<ol>
+{$sites}
+</ol>
+<center><a href="{$list_url}/{$url_helper_a}join{$url_tail}">{$lng->join_header}</a> | <a href="{$list_url}/">{$lng->ssi_all}</a></center>
+</td></tr></table>

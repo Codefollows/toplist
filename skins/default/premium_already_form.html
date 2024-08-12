@@ -1,0 +1,39 @@
+<legend>{$lng->user_cp_premium_already_conf}</legend>
+
+<p>{$premium_request_pending}</p>
+
+<div class="row">
+	<div class="col-md-4">
+		<div class="form-group">
+			<label for="premium_total_day">{$lng->user_cp_premium_already_tot_days}:</label>
+			<input type="text" value="{$total_day}" id="premium_total_day" class="form-control" readonly>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">
+			<label for="premium_remain_day">{$lng->user_cp_premium_already_remain_days}:</label>
+			<input type="text" value="{$remain_day}" id="premium_remain_day" class="form-control" readonly>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">
+			<label for="premium_total_week">{$lng->user_cp_premium_already_tot_weeks}:</label>
+			<input type="text" value="{$weeks_buy}" id="premium_total_week" class="form-control" readonly>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="form-group">
+			<label for="premium_start">{$lng->user_cp_premium_already_date_start}:</label>
+			<input type="text" value="{$date_start_premium}" id="premium_start" class="form-control" readonly>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			<label for="premium_end">{$lng->user_cp_premium_already_date_end}:</label>
+			<input type="text" value="{$date_end_premium}" id="premium_end" class="form-control" readonly>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,161 @@
+<script language="javascript">
+<!-- hide
+function check(input,char_ck) {
+  var ok = true;
+
+  for (var i = 0; i < input.length; i++) {
+    var chr = input.charAt(i);
+    var found = false;
+    for (var j = 0; j < char_ck.length; j++) {
+      if (chr == char_ck.charAt(j)) {
+	  	found = true;
+	  }
+    }
+    if (!found) ok = false;
+  }
+
+  return ok;
+}
+function test(input) {
+  if (!check(input, '1234567890')) {
+	return false;
+  }
+  else {
+  	return true;
+  }   
+}
+
+function total_upd(form_name, weeks, price, tot_price, tot_day, d_qty_01, d_v_01, d_qty_02, d_v_02, d_qty_03, d_v_03, line_d, final_price)
+{
+  var total_w = document.forms[form_name].elements[weeks];
+  var total_pr = document.forms[form_name].elements[tot_price];
+  var final_pr = document.forms[form_name].elements[final_price];
+  var total_days = document.forms[form_name].elements[tot_day];
+  var line_dv = document.forms[form_name].elements[line_d];
+
+  
+  var discount_line = 0;
+  var ok_calc = true;
+  
+  if (!total_w.value || total_w.value == 0 || total_w.value == null || test(total_w.value) == false)
+  {
+  	/*alert ('Please, set the correct amount of weeks you want to Buy !!');*/
+	ok_calc = false;
+  }
+  else {
+	if (d_qty_01 > 0 && total_w.value >= d_qty_01)  
+  	{
+		discount_line = d_v_01;  
+  	}
+	if (d_qty_02 > 0 && total_w.value >= d_qty_02)  
+  	{
+		discount_line = d_v_02;  
+  	}
+	if (d_qty_03 > 0 && total_w.value >= d_qty_03)  
+  	{
+		discount_line = d_v_03;  
+  	}
+  }
+  
+  if (ok_calc) {
+  if (discount_line != 0)
+  {
+	var result = price * total_w.value;
+	var discount = ((result * discount_line) / 100);
+  	total_days.value = total_w.value * 7;
+  	total_pr.value = result.toFixed(2);
+	line_dv.value = discount_line;
+	var final = (result.toFixed(2) - discount);
+	final_pr.value = final.toFixed(2);
+
+  } else
+  {
+	var result = price * total_w.value;
+  	total_days.value = total_w.value * 7;
+  	total_pr.value = result.toFixed(2);
+	line_dv.value = 0;
+	final_pr.value = result.toFixed(2);
+
+
+  }
+  }
+  else {
+  	total_w.value = '';
+  	total_days.value = '';
+  	total_pr.value = '';
+	line_dv.value = '';
+	final_pr.value = '';
+	document.forms[form_name].elements[weeks].focus();
+  }
+}
+// -->
+</script>
+
+<style>
+.price {
+	float:left; padding: 12px; background: ; border: 1px solid #ccc; margin: 0 10px 0 0; text-align: center;
+}
+</style>
+
+<form action="{$list_url}/index.php?a=user_cpl&amp;b=user_premium&amp;site={$site}" method="post" name="premium">
+
+{$csrf_token}
+
+<fieldset>
+<legend>{$lng->join_premium_input}</legend>
+
+<div class="price lightbgalt">
+<strong>{$discount_qty_01} {$lng->g_premium_weeks}<br />{$discount_value_01}%  {$lng->g_premium_discount}.</strong><br />
+</div>
+
+<div class="price lightbg">
+<strong>{$discount_qty_02} {$lng->g_premium_weeks}<br />{$discount_value_02}%  {$lng->g_premium_discount}.</strong><br />
+</div>
+
+<div class="price lightbgalt">
+<strong>{$discount_qty_03} {$lng->g_premium_weeks}<br />{$discount_value_03}%  {$lng->g_premium_discount}.</strong><br />
+</div>
+
+<br class="cb" />
+<br />
+<label for="premium_week_qty">{$lng->g_premium_day_qty_input}</label>
+<input type="text" name="total_weeks" size="4" value="{$total_weeks}" id="premium_week_qty" onkeyup="total_upd('premium', 'total_weeks', {$one_w_price}, 'total_price', 'total_days', {$discount_qty_01}, {$discount_value_01}, {$discount_qty_02}, {$discount_value_02}, {$discount_qty_03}, {$discount_value_03}, 'line_discount', 'final_price')"/>
+<br />
+<br />
+
+
+
+<fieldset>
+<legend>{$lng->join_premium_total}</legend>
+
+<label for="premium_total_days">{$lng->g_premium_total_days_count}</label>
+<input type="text" name="total_days" size="4" value="{$total_days}" id="premium_total_days" readonly="true" />
+<br />
+<br />
+
+<label for="premium_discount">{$lng->g_line_discount}:</label>
+<input type="text" name="line_discount" size="4" value="{$line_discount}" id="premium_discount" readonly="true" /> %
+<br />
+<br />
+
+<label for="premium_total_price">{$lng->g_premium_total_price} ({$currency_symbol})</label>
+<input type="text" name="total_price" size="4" value="{$total_price}" id="premium_total_price" readonly="true" /> 
+<br />
+<br />
+<label for="premium_final_price">{$lng->g_premium_final_price} ({$currency_symbol})</label>
+<input type="text" name="final_price" size="4" value="{$final_price}" id="premium_final_price" readonly="true" /> 
+<br />
+</fieldset>
+
+</fieldset>
+
+<fieldset>
+<legend>{$lng->join_premium_program}</legend>
+
+<p align="center"><button class="button1" name="submit" type="submit">{$lng->g_premium_buy_proceed}</button></p>
+
+<br />
+</fieldset>
+
+</form>
+

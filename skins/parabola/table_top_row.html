@@ -1,0 +1,27 @@
+<div class="table_top">
+    <div class="table_top_title">
+        <span class="rank">#{$rank}</span>
+        <a href="{$url}" onclick="out(this,'{$username}');" class="show_banner" title="{$title}" rel="nofollow">{$title}</a>
+    </div>
+    <div class="table_top_inside_border">
+        <div class="table_top_inside">
+            <div class="right badge">
+                <a href="{$list_url}/{$url_helper_a}details{$url_helper_u}{$username}{$url_tail}">
+                {$screenshot}<br />
+                <img src="{$skins_url}/{$skin_name}/stats.png" alt="{$lng->table_stats}" height="21" width="21" /><br />{$lng->table_stats} <br /><img src="{$skins_url}/{$skin_name}/{$up_down}.png" alt="{$lng->up_down}" /></a>
+            </div>
+
+			<div {$banner_container_width}>
+				<a href="{$url}" onclick="out(this,'{$username}');" rel="nofollow">{$banner}</a>
+			</div>
+			
+            <p>{$description, length=255}</p>
+
+            {$rankings_custom_fields}
+
+            <div class="catinfo">
+                <em>{$lng->g_category}</em>: <a href="{$list_url}/{$url_helper_cat}{$category_url}{$url_tail}">{$category}</a>
+            </div>
+        </div>
+    </div>
+</div>

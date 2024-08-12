@@ -1,0 +1,147 @@
+<script>
+	window.VisioList = {	
+		ajax: async function(url, type = 'GET', dataObj = {}) {
+			
+			const method = type.toUpperCase();
+
+			let options = {
+				method: method,
+				headers: {
+					'Content-type': 'text/plain; charset=UTF-8'
+				}
+			};
+			
+			if (method === 'POST') {
+				
+				const dataString = Object.entries(dataObj).map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&');
+				
+				options.headers = {
+					'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				};
+				options.body = dataString;
+			}
+			
+			const response = await fetch(url, options);
+			
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			} 
+			
+			if (method === 'POST') {
+				return await response.json();
+			}
+			else {
+				return await response.text();
+			}
+		}
+	};
+	
+	
+	const payment_providers = document.getElementById('payment-providers');
+	const checkout          = document.getElementById('checkout');
+	
+	// Handles moving the provider form back and forth btw provider selector and checkout button
+	payment_providers.addEventListener('click', e => {	
+
+		const target = e.target.closest('.payment-provider');
+
+		if (!target || target.classList.contains('selected') && !target.classList.contains('default-provider')) {
+			return;
+		}
+		
+		const handler         = target.querySelector('.checkout-handler');
+		const selected        = payment_providers.querySelector('.payment-provider.selected');
+		const checkout_button = checkout.querySelector('.checkout-handler');
+
+		if (selected) {
+			selected.classList.remove('selected', 'default-provider');
+		}
+		
+		target.classList.add('selected');
+		
+		if (checkout_button) {
+			
+			const parent = payment_providers.querySelector(checkout_button.dataset.parent);
+			
+			checkout_button.style.display = 'none';
+			parent.append(checkout_button);
+		}
+		
+		handler.style.display = '';
+		checkout.innerHTML = '';
+		checkout.append(handler);
+	});	
+
+	// replace the default disabled checkout button with the first provider submit handler					
+	payment_providers.querySelector('.payment-provider').dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));	
+
+	// Handle extra verification based on provider
+	checkout.addEventListener('click', async e => {	
+	
+		e.preventDefault();
+	
+		const target = e.target.closest('.provider-submit');
+
+		if (!target) {
+			return;
+		}
+				
+		const provider         = target.dataset.provider;
+		const service          = target.dataset.service;
+		const service_value    = target.dataset.serviceValue;
+		const service_username = target.dataset.serviceUsername;
+			
+		target.disabled = true;
+		
+		target.querySelector('.svg-waiting').style.display = '';
+		target.querySelector('span').textContent = 'Redirecting to gateway';
+		
+		await VisioList.ajax('{$payment_checkout_url}', 'POST', { provider: provider, service: service, service_value: service_value, service_username: service_username }).then(response => {
+					
+			if (response.hasOwnProperty('error')) {
+				
+				alert(response.error);
+
+				target.disabled = false;
+				target.querySelector('.svg-waiting').style.display = 'none';
+				target.querySelector('span').textContent = 'Checkout';
+			}
+			else {
+			
+				/**
+				 * trigger the element, this way, plugin providers can catch the trigger and do their own stuff, like stripe for example requires js handling instead of form
+				 * By default we auto submit if the handler is a form
+				 *
+				 *	document.getElementById('checkout').addEventListener('checkout-submit', e => {
+				 *			
+				 *		const target   = e.target;			
+				 *		const provider = e.detail.provider;
+				 *		const response = e.detail.response;
+				 *
+				 *		if (provider === 'MyProvider') {
+				 *			// Do something with response
+				 *		}
+				 *	});
+				 */
+				target.dispatchEvent(
+					new CustomEvent('checkout-submit', { 
+						bubbles: true,
+						cancelable: true,
+						detail: { 
+							provider: provider, 
+							response: response 
+						}
+					})
+				);
+					
+				const handler = checkout.querySelector('.checkout-handler');
+				const is_form = handler.nodeName === 'FORM';
+					
+				if (is_form) {
+					handler.submit();
+				}
+			}
+			
+		}).catch(alert);
+	});	
+</script>

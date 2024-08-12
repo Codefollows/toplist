@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>{$lng->gateway_header}</title>
+<meta http-equiv="Content-Type" content="text/html;charset={$lng->charset}" />
+	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+
+
+jQuery(document).ready(function(){
+	jQuery(".visio_button").hover(function(){jQuery(this).stop().animate({opacity:0.8},250)},
+	function(){jQuery(this).stop().animate({opacity:1.0},250)})
+	});
+
+</script>
+<link rel="stylesheet" type="text/css" media="screen" href="{$skins_url}/{$skin_name}/screen.css?v=1.0.0" />
+<style type="text/css">
+
+
+
+.gatemessage {
+display: block;
+border-bottom: 1px dashed #ccc;
+background: #f8f8f8;
+padding: 5px;
+}
+
+#gatewrap {
+border: 1px solid #ccc;
+padding: 2px; 
+margin: 50px auto; 
+width: 700px;
+border-radius: 15px;
+background: #fff;
+box-shadow: 0px 0px 10px #ccc;
+}
+#gatewrap2 {
+border: 1px solid #f2f2f2;
+padding: 1px;  
+width: 696px;
+border-radius: 15px;
+background: #f7f7f7;
+}
+
+h1 {
+display: block;
+text-align: center; 
+margin: 0;
+color: #666;
+text-shadow: 1px 1px 1px #fff;
+}
+
+
+.visio_button, .visio_button:hover {
+	text-decoration: none;
+	border: 0;
+	display:inline-block;
+	color: #fff !important;
+	}
+.visio_button span {
+	display:block;
+	}
+
+.small_button{
+	margin:5px 10px 5px 0;
+	padding:0 21px 0 0;
+	font-size: .9em;
+	background: transparent url({$skins_url}/{$skin_name}/img/bg-buttons-sprite.png) 100% -43px no-repeat scroll;
+	color: #F4F4F2;
+	}
+.small_button span{
+	margin:0;
+	padding:16px 0 17px 21px;
+	line-height: 10px;
+	background:transparent url({$skins_url}/{$skin_name}/img/bg-buttons-sprite.png) 0 0 no-repeat scroll;
+	}
+
+
+.medium_button{
+	margin:5px 10px 5px 0;
+	padding:0 23px 0 0;
+	font-size: 1em;
+	background: transparent url({$skins_url}/{$skin_name}/img/bg-buttons-sprite.png) 100% -136px no-repeat scroll;
+	color: #F4F4F2;
+	}
+.medium_button span{
+	margin:0;
+	padding:19px 0 19px 23px;
+	line-height: 12px;
+	background:transparent url({$skins_url}/{$skin_name}/img/bg-buttons-sprite.png) 0 -86px no-repeat scroll;
+	}
+
+
+.large_button{
+	margin:5px 10px 5px 0;
+	padding:0 34px 0 0;
+	font-size: 1.1em;
+	background: transparent url({$skins_url}/{$skin_name}/img/bg-buttons-sprite.png) 100% -261px no-repeat scroll;
+	color: #F4F4F2;
+	border:0;
+	outline:none;
+	cursor:pointer;
+	}
+.large_button span{
+	margin:0;
+	padding:28px 0 33px 33px;
+	line-height: 16px;
+	background:transparent url({$skins_url}/{$skin_name}/img/bg-buttons-sprite.png) 0 -186px no-repeat scroll;
+	border:0;
+	outline:none;
+	cursor:pointer;
+	}
+
+.red span, .red {
+	background-image: url({$skins_url}/{$skin_name}/img/red-sprite.png) !important;
+	}
+.green span, .green {
+	background-image: url({$skins_url}/{$skin_name}/img/green-sprite.png) !important;
+	}
+
+</style>
+
+</head>
+<body>
+<div id="gatewrap"><div id="gatewrap2">
+	<h1>{$lng->gateway_header}</h1>
+
+		<div id="gateway-top">{$gateway_top}</div>
+
+		<p class="gatemessage">{$lng->gateway_text}</p><br /><br />
+		<a href="{$list_url}/" class="visio_button large_button red"><span>{$lng->gateway_no_vote}</span></a>
+		<a href="{$list_url}/index.php?a=in&amp;u={$username}&amp;sid={$sid}" class="visio_button large_button green"><span>{$lng->gateway_vote}</span></a>
+        
+        <p>
+        {$url} - {$description}
+        </p>
+        
+		<div id="gateway-bottom">{$gateway_bottom}</div>
+
+</div></div>
+</body>
+</html>

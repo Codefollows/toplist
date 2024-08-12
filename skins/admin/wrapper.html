@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>{$list_name} - {$header}</title>
+<meta http-equiv="Content-Type" content="text/html;charset={$lng->charset}" />
+
+    <link rel="stylesheet" type="text/css" href="{$skins_url}/{$skin_name}/jquery-ui-1.10.3.custom.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{$skins_url}/{$skin_name}/default.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+  
+	<link rel="alternate" href="{$list_url}/{$feed}" type="application/rss+xml" title="{$list_name}" />
+   
+		
+	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>	
+	<script type="text/javascript" src="js/jquery.tipTip.minified.js"></script>
+    <link rel="stylesheet" href="js/tipTip.css">	
+	<script type="text/javascript" src="{$skins_url}/{$skin_name}/superfish.js"></script>  		
+
+    
+    <link rel="stylesheet" href="js/codemirror/codemirror.css">
+    
+    <script src="js/codemirror/codemirror.js"></script>
+    <script src="js/codemirror/xml.js"></script>
+    <script src="js/codemirror/javascript.js"></script>
+    <script src="js/codemirror/css.js"></script>
+    <link rel="stylesheet" href="js/codemirror/default.css">
+    <script src="js/codemirror/htmlmixed.js"></script>
+    
+
+
+	<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="js/jquery.fancybox.pack.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="js/jquery.fancybox.css?v=2.1.5" media="screen" />
+
+	<script type="text/javascript" src="js/prettify.js"></script>
+    
+    
+	<script language="Javascript" type="text/javascript">
+
+
+
+$(document).ready(function() {
+
+// Initialize some plugins
+
+     $('ul.topmenu').superfish();
+           
+     $(".vistip").tipTip({maxWidth: "auto",  edgeOffset: 10});
+     
+     $(".overla").fancybox({
+		maxWidth	: 500,
+		maxHeight	: 300,
+		fitToView	: false,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: false,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none',
+        overlayShow : 'true',
+        overlayColor : '#000'
+
+	});
+     
+     $( "#tabs" ).tabs();
+	
+     $( "#accordion" ).accordion({
+          collapsible: true,
+          heightStyle: "content"
+     });
+
+     {$slider_perpage}
+	 {$jquery_new_input}
+
+     $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+
+     $( "#progressbar" ).progressbar({
+	    value: {$sweetscore} + 1
+     });
+
+                  
+// Select all / none links for checkboxes
+     $("span#selectall").click(function () {
+          $(".check_selectall_none:checkbox").each(function() { 
+               this.checked = true; 
+               $(this).change(); 
+          });
+     }); 
+     $("span#selectnone").click(function () {
+          $(".check_selectall_none:checkbox").each(function() { 
+               this.checked = false; 
+               $(this).change(); 
+          }); 
+     });
+                 
+    // VL Menu Manager > Add Menu Item
+    $("a.vl_core_links").click(function(e){
+        var add = $(this).attr("title");
+        $("input#path").val(add);
+       
+        e.preventDefault();
+    });
+
+
+});
+
+// Error Styles
+(function($) {
+    $.fn.errorStyle = function() {
+        var oldErrore = this.html();
+        var StyledError = "<div class=\"ui-state-error ui-corner-all\" style=\"padding: 0 .7em;\">";
+            StyledError += "<p><span class=\"ui-icon ui-icon-alert\" style=\"float: left; margin-right: .3em;\">";
+            StyledError += "</span><strong>Alert:</strong>";
+            StyledError += oldErrore ;
+            StyledError += "</p></div>";
+			this.replaceWith(StyledError );
+    }
+
+
+    $.fn.highlightStyle = function() {
+        var oldErrore = this.html();
+        var StyledError = "<div class=\"ui-state-highlight ui-corner-all\" style=\"padding: 0 .7em;\">";
+            StyledError += "<p><span class=\"ui-icon ui-icon-alert\" style=\"float: left; margin-right: .3em;\">";
+            StyledError += "</span>";
+            StyledError += oldErrore ;
+            StyledError += "</p></div>";
+			this.replaceWith(StyledError );
+    }
+})(jQuery);
+
+
+// Delete Plugin Confirm
+<!--
+function confirmSubmit() {
+     var agree=confirm("Are you sure you wish to proceed?");
+          if (agree)
+	         return true ;
+          else
+	         return false ;
+}
+
+function popitup(url) {
+	newwindow=window.open(url,'name','height=600,width=850,scrollbars=yes');
+	if (window.focus) {newwindow.focus()}
+	return false;
+}
+// -->
+
+
+</script>
+
+
+
+
+<script type="text/javascript" src="{$skins_url}/{$skin_name}/tiny_mce/tinymce.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    tinymce.init({
+        selector: "textarea.tinymce",
+        theme: "modern",
+        font_size_style_values: "8pt,10pt,12pt,14pt,18pt,24pt,36pt",
+        plugins: 'advlist anchor autolink autoresize autosave charmap code contextmenu directionality emoticons fullscreen hr image insertdatetime layer legacyoutput link lists media nonbreaking noneditable pagebreak paste preview print save searchreplace spellchecker tabfocus table template textcolor visualblocks visualchars wordcount',
+        toolbar: "preview print undo redo | bold italic underline | fontselect | fontsizeselect | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image emoticons | code",
+		convert_urls: false
+    });
+});
+</script>
+
+		
+
+</head>
+<body>
+
+
+
+<div id="logout"><a href="{$list_url}/index.php?a=admin&b=logout">&nbsp;</a></div>
+
+<div id="wrapper">
+
+<div id="topbar"><a href="{$list_url}"><img src="{$skins_url}/{$skin_name}/images/logo2.png"  alt="{$list_name}"/></a></div>
+
+
+<div class="box-style">
+
+	
+<ul class="topmenu">
+<li><a href="{$list_url}/index.php?a=admin"><img src="{$skins_url}/{$skin_name}/images/home.png" alt="" /> {$lng->a_menu_main}</a></li>
+
+<li><a href="{$list_url}/index.php?a=admin&amp;b=manage">{$lng->a_header_members}</a>
+    <ul>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=approve">{$lng->a_menu_approve}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=approve_edited">{$lng->a_menu_approve_edits}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=manage">{$lng->a_menu_manage}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=inactive">{$lng->a_menu_inactive}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=manage_premium">{$lng->a_menu_manage_premium}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=email">{$lng->a_menu_email}</a></li>
+    {$admin_members_menu}
+    </ul>
+</li>
+
+<li><a href="{$list_url}/index.php?a=admin&amp;b=settings">{$lng->a_header_settings}</a>
+    <ul>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=settings">{$lng->a_menu_settings}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=skins">{$lng->a_menu_skins}</a></li>
+    {$admin_settings_menu}
+    </ul>
+</li>
+<li><a href="">{$lng->a_header_tools}</a>
+    <ul>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=backup_database">{$lng->a_menu_backup}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=manage_ban">{$lng->a_menu_manage_ban}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=manage_bad_words">{$lng->a_menu_manage_bad_words}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=manage_join_fields">{$lng->a_menu_manage_join}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=ffmpeg_convert">{$lng->ffmpeg_header}</a></li>		
+    {$admin_tools_menu}
+    </ul>
+</li>
+
+
+<li><a href="{$list_url}/index.php?a=admin&amp;b=manage_reviews">{$lng->a_header_reviews}</a>
+    <ul>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=approve_reviews">{$lng->a_menu_approve_reviews}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=manage_reviews">{$lng->a_menu_manage_reviews}</a></li>
+    {$admin_reviews_menu}
+    </ul>
+</li>
+
+<li><a href="{$list_url}/index.php?a=admin&amp;b=manage_pages">{$lng->a_header_pages}</a>
+    <ul>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=manage_menus">{$lng->a_menu_manage_menu}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=create_page">{$lng->a_menu_create_page}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=manage_pages">{$lng->a_menu_manage_pages}</a></li>
+    <li><a href="{$list_url}/index.php?a=admin&amp;b=manage_languages">{$lng->a_menu_manage_languages}</a></li>	
+    {$admin_pages_menu}
+    </ul>
+</li>
+
+
+<li><a href="{$list_url}/index.php?a=admin&amp;b=plugins">{$lng->a_header_plugins}</a></li>
+
+
+</ul>
+
+</div>
+
+
+
+
+
+<div id="main_content">
+	<div id="innercontent">
+	
+	{$content}
+
+
+
+
+	<div style="clear: both"> &nbsp;</div>
+	</div>
+</div>
+
+
+<div id="bottom">
+{$lng->main_executiontime}: {$execution_time} | {$lng->main_queries}: {$num_queries} | {$lng->main_members}: {$num_members}<br />
+{$list_name} - {$powered_by}
+</div>
+
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>{$list_name} - {$header}</title>
+	<base href="{$list_url}/" /> 
+	<meta http-equiv="Content-Type" content="text/html;charset={$lng->charset}" />
+	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="js/validate.js"></script>
+        {$header_js_files}	
+
+	<link rel="stylesheet" type="text/css" media="screen" href="skins/{$skin_name}/screen.css?v=1.0.0" />
+        {$css_styles}	
+	<link rel="stylesheet" type="text/css" media="screen" href="skins/{$skin_name}/user.css?v=1.0.0" />
+
+    <!--[if IE 9]>
+    <style type="text/css">
+        textarea, input { filter: none; }
+    </style>
+    <![endif]-->
+
+	<link rel="alternate" href="{$list_url}/{$feed}" type="application/rss+xml" title="{$list_name}" />
+        {$head_extra}
+	<meta name="description" content="{$meta_description}"/>
+	<meta name="keywords" content="{$meta_keywords}"/>
+</head>
+<body>
+
+{$wrapper_welcome}
+
+<div id="header">
+    <div id="logo"><a href="{$list_url}"><img src="{$skins_url}/{$skin_name}/img/logo.png" alt="{$list_name}"/></a></div>
+    <div id="headside">
+        <div id="headbanner">{$zone_a}</div>
+    </div>
+</div>
+
+<div id="wrapper">
+
+	<div id="navigation">     	
+        <div id="search">
+		  <form action="{$list_url}/" method="get" onsubmit="return false;">
+		   <p style="margin:  0;">
+		      <input type="hidden" name="a"  value="search" />
+		      <input type="text" name="q" class="searchbox" value="{$query}" />
+		      <input type="submit" class="searchgo" value="{$lng->main_menu_search}" onclick="window.location.href=this.form.action + '{$url_helper_a}' + this.form.a.value + '{$url_helper_q}' + encodeURIComponent(this.form.q.value).replace(/(%20|%2F|\%26)+/g, '+').replace(/^[\+]|[\+]$/g, '') + '{$url_tail}';" />
+		   </p>
+		  </form>
+	    </div>
+
+		<div id="topmenu">
+		    {$menu-1}
+			<br class="cb" />
+		</div>
+    </div>
+
+    {$user_cp_main_menu}
+
+	<div id="content">
+	    <div class="cb"> </div>
+
+	    {$front_page_top}
+
+ 	    <div id="sidebar">
+            {$sidebar_1_top}
+
+            {$zone_b}
+
+            <h3 class="heading">{$lng->main_method}</h3>
+            <ul class="category_menu">
+                <li><a href="{$list_url}/{$url_helper_method}in{$cat_sort}{$url_tail}">{$lng->rank_hits_in} {$method_in}</a></li>
+                <li><a href="{$list_url}/{$url_helper_method}out{$cat_sort}{$url_tail}">{$lng->rank_hits_out} {$method_out}</a></li>
+                <li{$pv_hide}><a href="{$list_url}/{$url_helper_method}pv{$cat_sort}{$url_tail}">{$lng->rank_pageviews} {$method_views}</a></li>
+            </ul>
+
+            <h3 class="heading">{$lng->a_skins_categories}</h3>
+            {$category_menu}
+
+            {$featured_member}
+
+            {$premium_list} 
+
+            {$sidebar_1_bottom}
+        </div>
+
+        <div id="main">
+            {$category_welcome}
+
+            {$content}
+
+            {$zone_c}
+
+   	        {$pagination}
+        </div>
+
+    </div>
+    <br class="cb" />
+
+</div>
+
+<div id="foot" class="cb">
+    <div style="width: 960px; margin: 0 auto;">
+		<div class="box third start">
+			<div class="small">
+			{$footer_1}
+			</div>
+		</div>
+		<div class="box third">
+			<div class="small">
+			<h3>{$lng->g_navigation}</h3>
+			{$footer_2}
+			{$menu-1}		
+			</div>
+		</div>
+		<div class="box third end">
+			<div class="small">
+			<h3>{$lng->table_stats}</h3>
+			<ul>
+				<li>{$lng->main_executiontime}: {$execution_time}</li>
+				<li>{$lng->main_members}: {$num_members}</li>
+				<li>{$powered_by}</li>
+			</ul>
+
+			</div>
+		</div>
+		<br class="cb" />	
+    </div>
+</div>
+
+{$footer_content}
+
+{$footer_js_files}
+
+<script type="text/javascript">
+    function out(link,username) {
+        out_url = '{$list_url}/index.php?a=out&u=' + username+'&go=1';
+        link.href = out_url; // For browsers that don't support setAttribute 
+         link.setAttribute('href', out_url); 
+    }
+
+	$(function() {
+
+        $('#login').click(function() {
+            $('#login-form').slideToggle('slow', function() {
+                // Animation complete.
+            });
+        });
+
+        $('#show_dropuser').hover(function() {
+            $('#dropuser').show();
+        }, function() {
+            $('#dropuser').hide();
+        });
+
+		$('ul.tabs').each(function(){
+			var $active, $content, $links = $(this).find('a');
+
+			$active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+			$active.addClass('active');
+			$content = $($active.attr('href'));
+
+			$links.not($active).each(function () {
+				$($(this).attr('href')).hide();
+			});
+
+			$(this).on('click', 'a', function(e){
+				$active.removeClass('active');
+				$content.hide();
+
+				$active = $(this);
+				$content = $($(this).attr('href'));
+
+				$active.addClass('active');
+				$content.show();
+
+				e.preventDefault();
+			});
+		});
+
+		$(".category_menu > li a").hover(
+			function (e) {
+				$this = $(this)
+				$this.stop().animate({
+					paddingLeft : '10px'
+				}, {queue:false,duration:300});
+			},
+			function () {
+				$this = $(this)
+				$this.animate({
+					paddingLeft : '0px'
+				}, {queue:false,duration:300});
+			}
+		);
+
+	});
+</script>
+
+{$extra_javascripts}
+
+</body>
+</html>

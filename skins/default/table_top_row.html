@@ -1,0 +1,39 @@
+<div class="rankbox">
+	<div class="row titlebar">
+		<div class="col-md-8">
+			<strong>
+				<span>#{$rank}</span>
+				<img src="{$skins_url}/{$skin_name}/images/{$up_down}.png" alt="{$lng->up_down}" />
+				<a href="{$list_url}/{$url_helper_a}details{$url_helper_u}{$username}{$url_tail}" class="show_banner" title="{$title}" rel="nofollow">{$title}</a>
+			</strong>
+		</div>
+		<div class="col-md-4 tablecat">
+			<a href="{$list_url}/{$url_helper_cat}{$category_url}{$url_tail}">
+				<span class="badge badge-secondary"><i class="fas fa-tags"></i> {$category}</span>
+			</a>
+			<a href="{$list_url}/{$url_helper_a}details{$url_helper_u}{$username}{$url_tail}">
+				<span class="badge badge-primary"><i class="fas fa-door-open"></i>  {$lng->stats_info}</span>
+			</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 col-lg-2">
+			<a href="{$list_url}/{$url_helper_a}details{$url_helper_u}{$username}{$url_tail}" class="hidden-xs">{$screenshot}</a>
+		</div>
+		<div class="col-md-8 col-lg-10">
+		
+			<p>{$description, length=255}</p>
+
+			<a href="{$url}" onclick="out(this,'{$username}');" rel="nofollow" class="site-image-container" style="{$banner_aspect_base} {$banner_aspect_ratio}">{$banner}</a>
+
+			{$rankings_custom_fields}
+
+			<span class="badge badge-primary">{$lng->g_unq_in}: {$unq_in_0_monthly}</span>
+			<span class="badge badge-secondary">{$lng->g_unq_out}: {$unq_out_0_monthly}</span>
+
+			<a href="{$list_url}/index.php?a=in&u={$username}">
+				<span class="badge badge-success"><i class="fas fa-vote-yea"></i> {$lng->a_vote}</span>
+			</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,46 @@
+
+<div class="card bg-light">
+	<div class="card-body">
+	
+		<h3 class="mb-3 text-center">{$lng->join_premium_review}</h3>
+		<div class="table-responsive">
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>Account</th>
+						<td class="text-right">{$username}</td>
+					</tr>
+					<tr>
+						<th>{$lng->g_premium_tot_weeks}</th>
+						<td class="text-right">{$weeks_buy} ({$total_day} {$lng->review_premium_total_days})</td>
+					</tr>
+					<tr>
+						<th>{$lng->g_premium_line_discount}</th>
+						<td class="text-right">{$line_discount}%</td>
+					</tr>
+					<tr class="border-bottom">
+						<th class="align-middle">{$lng->g_premium_final_price}</th>
+						<td class="h2 text-right text-success">{$currency_symbol}{$final_price_display}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="text-center">
+
+			<h3 class="my-4">Select Payment Provider</h3>
+			
+			<div id="payment-providers" class="row justify-content-center">
+				{$payment_providers}
+			</div>
+			
+			<div id="checkout">
+				<button class="btn btn-lg btn-success" disabled>Checkout</button>
+			</div>
+				
+		</div>
+
+	</div>
+	
+</div>
+			

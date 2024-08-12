@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>{$list_name} - {$lng->maintenance_header}</title>
+<meta http-equiv="Content-Type" content="text/html;charset={$lng->charset}" />
+
+<link rel="stylesheet" type="text/css" media="screen" href="{$skins_url}/{$skin_name}/screen.css" />
+<style type="text/css">
+
+.maintenance-message {
+  display: block;
+  background: #f8f8f8;
+  padding: 5px;
+}
+
+#maintenance-wrap {
+  border: 1px solid #ccc;
+  padding: 2px; 
+  margin: 50px auto; 
+  width: 700px;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0px 0px 10px #ccc;
+}
+#maintenance-wrap2 {
+  border: 1px solid #f2f2f2;
+  padding: 1px;  
+  width: 696px;
+  border-radius: 15px;
+  background: #f7f7f7;
+}
+
+h1 {
+  display: block;
+  text-align: center; 
+  margin: 0;
+  color: #666;
+  text-shadow: 1px 1px 1px #fff;
+}
+
+</style>
+
+</head>
+<body>
+<div id="maintenance-wrap">
+    <div id="maintenance-wrap2">
+	    <h1>{$list_name} - {$lng->maintenance_header}</h1>
+
+	    <p class="maintenance-message">{$lng->maintenance_info}</p>
+
+    </div>
+</div>
+
+</body>
+</html>

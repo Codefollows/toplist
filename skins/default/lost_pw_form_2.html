@@ -1,0 +1,12 @@
+
+<form action="{$list_url}/index.php?a=lost_pw&amp;sid={$sid}" method="post">
+    <fieldset>
+        <legend>{$lng->lost_pw_header}</legend>
+        <p>
+            <label for="lost_pw_new_username">{$lng->lost_pw_new}</label>
+            <input type="password" name="password" class="form-control" id="lost_pw_new_username" />
+        </p>
+
+        <input type="submit" name="submit" class="btn btn-primary" value="{$lng->lost_pw_set_new}">
+    </fieldset>
+</form>

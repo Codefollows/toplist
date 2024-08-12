@@ -1,0 +1,24 @@
+.p_ads_button {
+    padding: 20px 0;
+}
+ul.p_ads_headings {
+    padding: 20px 0 0 0;
+    clear: left;
+    float: left;
+}
+ul.p_ads_headings li {
+    width: 200px;
+    float: left;
+}
+ul.p_ads_zones {
+    float: left;
+    clear: left;
+}
+ul.p_ads_zones li {
+    width: 200px; 
+    padding: 5px 0;
+    float: left;
+}
+ul.p_ads_zones li.first {
+    clear: left;
+}

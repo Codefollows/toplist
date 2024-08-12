@@ -1,0 +1,20 @@
+
+<div id="login-form" title="{$lng->a_login}">
+    <form action="{$list_url}/index.php?a=user_cpl" method="post">
+        <p style="margin-bottom: 20px;">
+            <label for="u" class="inlin">{$lng->g_username}</label>
+            <input name="u" size="20" type="text"  class="text_input" id="u" />
+            <label for="password" class="inlin">{$lng->g_password}</label>
+            <input name="password" size="20" type="password" class="text_input" id="password" />
+            <input value="{$lng->user_cp_login}" type="submit"/>
+        </p>
+        <p class="basebox">
+            <a href="{$list_url}/{$url_helper_a}join{$url_tail}" class="but">{$lng->main_menu_join}</a> 
+            <a href="{$list_url}/{$url_helper_a}lost_pw{$url_tail}" class="but">{$lng->lost_pw_set_new}</a>
+        </p>
+    </form>
+</div>
+        
+<div id="login-top">
+    <span id="login">{$lng->user_cp_login}</span>
+</div>

@@ -1,0 +1,6 @@
+<div class="form-group">
+  <label for="join_captcha">{$lng->join_enter_text} (<a href="#" onclick="document.getElementById('captcha').src='{$list_url}/captcha.php?'+Math.random();return false">{$lng->join_enter_text_read}</a>)</label><br>
+  <img src="{$list_url}/captcha.php?{$rand}" alt="" class="img-fluid" id="captcha" /><br />
+  <input name="captcha" type="text" maxlength="6" id="join_captcha" class="form-control {$error_style_captcha}" />
+  {$error_captcha}
+</div>

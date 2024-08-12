@@ -1,0 +1,65 @@
+
+<fieldset>
+<legend>{$lng->join_premium_review}</legend>
+
+{$lng->g_username}: <strong>{$username}</strong><br /><br />
+{$lng->g_url}: <strong>{$url}</strong><br /><br />
+
+{$lng->g_premium_tot_weeks}: <strong>{$weeks_buy} ({$total_day} {$lng->review_premium_total_days})</strong>
+<br />
+<br />
+{$lng->g_premium_line_discount}: <strong>{$line_discount}%</strong>
+<br />
+<br />
+{$lng->g_premium_final_price}: <strong>{$currency_symbol}{$final_price}</strong>
+<br />
+<br />
+<br />
+
+<div style="display: inline-block;">
+<form  name="pp_value" action="https://www.{$paypal_sandbox}paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="{$email_pay}">
+<input type="hidden" name="item_name" value="{$pp_item_description} - {$site}">
+<input type="hidden" name="amount" value="{$final_price}">
+<input type="hidden" name="shipping" value="0.00">
+<input type="hidden" name="buyer_credit_promo_code" value="">
+<input type="hidden" name="buyer_credit_product_category" value="">
+<input type="hidden" name="buyer_credit_shipping_method" value="">
+<input type="hidden" name="buyer_credit_user_address_change" value="">
+<input type="hidden" name="no_shipping" value="1">
+<input type="hidden" name="return" value="{$list_url}/index.php?a=user_cpl&amp;b=user_premium&amp;csrf_token={$csrf_token}">
+<input type="hidden" name="no_note" value="1">
+<input type="hidden" name="currency_code" value="{$currency_code}">
+<input type="hidden" name="tax" value="0.00">
+<input type="hidden" name="lc" value="US">
+<input type="hidden" name="bn" value="PP-BuyNowBF">
+<input type="hidden" name="on0" value="Total Weeks">
+<input type="hidden" name="os0" maxlength="60" value="{$weeks_buy}">
+<input type="hidden" name="on1" value="Total Days">
+<input type="hidden" name="os1" maxlength="60" value="{$total_day}">
+<input type="hidden" name="custom" maxlength="60" value="{$site}">
+<p align="center"><button name="submit" type="submit"{$hide_paypal}><img src="{$skins_url}/{$skin_name}/img/paypal.png" alt=""/> {$lng->buy_button_paypal}</button></p>
+</form>
+</div>
+
+<div style="display: inline-block;">
+<form action="https://www.2checkout.com/checkout/purchase" method="post">
+<input name="id_type" value="1" type="hidden"/>
+<input name="sid" value="230177" type="hidden"/>
+<input name="x_Receipt_Link_URL" value="{$list_url}/index.php?a=user_cpl&amp;b=user_premium&amp;csrf_token={$csrf_token}" type="hidden"/>
+<input name="c_prod_1" value="6,1" type="hidden"/>
+<input name="fixed" value="Y" type="hidden"/>
+<input name="c_name_1" value="Premium Membership {$username}" type="hidden"/>
+<input name="c_description_1" value="Premium Membership {$username}" type="hidden"/>
+<input name="c_price_1" value="{$final_price}" type="hidden"/>
+<input name="c_tangible_1" value="N" type="hidden"/>
+<input name="total" value="{$final_price}" type="hidden"/>
+<input name="merchant_order_id" value="Premium-{$username}" type="hidden"/>
+<input name="cart_order_id" value="Premium-{$url}" type="hidden"/>
+<div class="payoptions-1-3">
+<button name="submit" type="submit"{$hide_2co}><img src="{$skins_url}/{$skin_name}/img/2co.png" alt=""/> {$lng->buy_button_2co}</button>
+</form></div>
+</div>
+
+</fieldset>

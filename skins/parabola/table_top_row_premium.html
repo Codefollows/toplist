@@ -1,0 +1,26 @@
+<div class="premium_table_top">
+    <div class="premium_title">
+        <span class="rank">#{$rank}</span>
+        <a href="{$url}" onclick="out(this,'{$username}');"><b>{$title}</b></a>
+    </div>
+    <div class="premium_inside_border">
+        <div class="premium_inside">
+            <div class="right premium_badge">
+                <a href="{$list_url}/{$url_helper_a}details{$url_helper_u}{$username}{$url_tail}">
+                {$screenshot}<br />
+                <img src="{$skins_url}/{$skin_name}/stats.png" alt="{$lng->table_stats}" height="21" width="21" /><br />{$lng->table_stats} <br /><img src="{$skins_url}/{$skin_name}/{$up_down}.png" alt="{$lng->up_down}" /></a>
+            </div>
+
+			<div {$banner_container_width}>
+				<a href="{$url}" onclick="out(this,'{$username}');" rel="nofollow">{$banner}</a>
+			</div>
+
+            <p>{$description, length=255}</p>
+
+            <div class="catinfo">
+                <a href="{$url}" onclick="out(this,'{$username}');" title="" class="callbutton">{$lng->g_visit}</a>
+                <em>{$lng->g_category}</em>: <a href="{$list_url}/{$url_helper_cat}{$category_url}{$url_tail}">{$category}</a>
+            </div>	
+        </div>
+    </div>
+</div>

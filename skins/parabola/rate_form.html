@@ -1,0 +1,28 @@
+<p>{$rate_message}</p>
+
+<form action="{$list_url}/{$url_helper_a}{$url_helper_rate}{$url_helper_u}{$username}{$url_tail}" method="post">
+    <fieldset>
+        <legend>{$lng->rate_header}</legend>
+        {$lng->rate_rating}<br />
+
+        <label for="rate_5">
+        <input type="radio" name="rating" value="5" id="rate_5" /><img src="{$skins_url}/{$skin_name}/rate_5.png" alt="5/5" /><br />
+
+        <label for="rate_4">
+        <input type="radio" name="rating" value="4" id="rate_4" /><img src="{$skins_url}/{$skin_name}/rate_4.png" alt="4/5" /><br />
+
+        <label for="rate_3">
+        <input type="radio" name="rating" value="3" checked="checked" id="rate_3" /><img src="{$skins_url}/{$skin_name}/rate_3.png" alt="3/5" /><br />
+
+        <label for="rate_2">
+        <input type="radio" name="rating" value="2" id="rate_2" /><img src="{$skins_url}/{$skin_name}/rate_2.png" alt="2/5" /><br />
+
+        <label for="rate_1">
+        <input type="radio" name="rating" value="1" id="rate_1" /><img src="{$skins_url}/{$skin_name}/rate_1.png" alt="1/5" /><br /><br />
+
+        <label for="rate_review">{$lng->rate_review}<br />
+        <textarea name="review" cols="40" rows="5" id="rate_review"></textarea><br /><br />
+
+         <input type="submit" value="{$lng->rate_header}" />
+    </fieldset>
+</form>

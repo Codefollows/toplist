@@ -1,0 +1,25 @@
+
+<div class="col-auto">
+
+	<div id="{$provider}-container" class="card card-body mb-3 cursor-pointer payment-provider">
+
+		<img src="images/payment/{$provider}.png" alt="{$provider} Logo">
+
+		<form action="https://www.paygol.com/pay" method="post" name="pg_frm" class="checkout-handler" data-parent="#{$provider}-container" style="display: none">
+			<input name="pg_serviceid" type="hidden" value="{$Paygol_service_id}"> 
+			<input name="pg_currency" type="hidden" value="{$service_currency}"> 
+			<input name="pg_name" type="hidden" value="{$service_item_name}"> 
+			<input name="pg_custom" type="hidden" value="{$service_metadata}"> 
+			<input name="pg_price" type="hidden" value="{$service_price}"> 
+			<input name="pg_return_url" type="hidden" value="{$service_return_url_success}"> 
+			<input name="pg_cancel_url" type="hidden" value="{$service_return_url_cancel}"> 
+			
+			<button class="provider-submit btn btn-lg btn-success d-inline-flex align-items-center" data-provider="{$provider}" data-service="{$service}" data-service-username="{$service_username}" data-service-value="{$service_value}">
+				<svg width="18" height="18" fill="currentColor" class="mr-2 fa-spin svg-waiting" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="display: none">
+					<path d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z"/>
+				</svg>
+				<span>Checkout</span>
+			</button>
+		</form>
+	</div>
+</div>

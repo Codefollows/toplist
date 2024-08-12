@@ -1,0 +1,26 @@
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['','{$lng->a_main_members}','{$lng->a_main_premium}'],          
+          ['{$lng->g_this_week}',{$joined_this_week},{$premium_this_week}],
+          ['{$lng->g_last_week}',{$joined_last_week},{$premium_last_week}],          
+          ['{$lng->g_2_weeks_ago}',{$joined_2_week},{$premium_2_week}], 
+          ['{$lng->g_3_weeks_ago}',{$joined_3_week},{$premium_3_week}], 
+          ['{$lng->g_4_weeks_ago}',{$joined_4_week},{$premium_4_week}]                            
+        ]);
+
+        var options = {
+
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+
+  
+    <div id="chart_div" style="width: 500px; height: 300px;float:left;margin: 0 30px 30px 0 ;"></div>

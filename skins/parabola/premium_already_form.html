@@ -1,0 +1,24 @@
+<fieldset class="uiform">
+<legend>{$lng->user_cp_premium_already_conf}</legend>
+
+{$premium_request_pending}
+<br /><br />
+
+  <label for="premium_total_day">{$lng->user_cp_premium_already_tot_days}:</label>
+    <input type="text" size="4" value="{$total_day}" id="premium_total_day" readonly="true" />
+    <br /><br />
+
+  <label for="premium_remain_day">{$lng->user_cp_premium_already_remain_days}:</label>
+    <input type="text" size="4" value="{$remain_day}" id="premium_remain_day" readonly="true" />
+    <br /><br />
+
+  <label for="premium_total_week">{$lng->user_cp_premium_already_tot_weeks}:</label>
+    <input type="text" size="4" value="{$weeks_buy}" id="premium_total_week" readonly="true" />
+    <br /><br />
+
+  <label for="premium_start">{$lng->user_cp_premium_already_date_start}:</label>
+    <input type="text" size="10" value="{$date_start_premium}" id="premium_start" readonly="true" />&nbsp;&nbsp;-&nbsp;&nbsp;{$lng->user_cp_premium_already_date_end}&nbsp;:&nbsp;<input type="text" size="10" value="{$date_end_premium}" readonly="true" />
+    <br />
+
+</fieldset>
+

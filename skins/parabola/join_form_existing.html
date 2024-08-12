@@ -1,0 +1,55 @@
+<p class="{$error_style_top}">{$error_top}</p>
+
+<form action="{$list_url}/index.php?a=user_cpl&amp;b=join_existing" method="post" name="join_form">
+
+{$csrf_token}
+
+<input type="hidden" name="ownerbox" value="{$owner_username}">
+<input type="hidden" name="password" value="{$rnd_password}">
+<input type="hidden" name="confirm_password" value="{$rnd_password}" />
+<input type="hidden" name="u" size="20" value="{$owner_username}-{$rand}" />
+
+
+<fieldset>
+<legend>{$lng->join_website}</legend>
+
+  <div class="{$error_style_url}">
+    <label for="join_url">{$lng->g_url}</label>
+      <input type="text" name="url" value="{$url}" id="join_url" class="in1" placeholder="http://" />
+      {$error_url}
+  </div>
+
+  <div class="{$error_style_title}">
+    <label for="join_title">{$lng->g_title}</label>
+      <input type="text" name="title" value="{$title}" id="join_title" class="in1" />
+      {$error_title}
+  </div>
+
+  <label for="join_description">{$lng->g_description}</label>
+    <textarea cols="40" rows="5" name="description" id="join_description">{$description}</textarea>
+
+  <label for="join_category">{$lng->g_category}</label>
+    {$categories_menu}
+
+  <div class="{$error_style_email}">
+    <label for="join_email">{$lng->g_email}</label>
+      <input type="text" name="email" value="{$email}" id="join_email" class="in1" />
+      {$error_email}
+  </div>
+
+  {$join_captcha}
+
+  {$join_recaptcha}
+
+  {$join_adscaptcha}
+
+  {$join_question}
+
+
+  {$join_security_extra}
+
+  <input name="submit" type="submit" value="{$lng->join_header}" class="button1" />
+
+</fieldset>
+
+</form>

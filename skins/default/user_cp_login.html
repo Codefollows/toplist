@@ -1,0 +1,23 @@
+<form action="{$list_url}/index.php?a=user_cpl" method="post">
+    <fieldset>
+		<legend>{$lng->user_cp_header}</legend>
+
+		<p>
+		  <label for="login_username">{$lng->g_username}</label>
+			<input type="text" name="u" id="login_username" class="form-control" />
+		</p>
+		<p>
+		  <label for="login_password">{$lng->g_password}</label>
+			<input type="password" name="password" size="20" id="login_password" class="form-control" />
+		</p>
+
+		<p>
+			<label>
+				<input type="checkbox" name="keep_alive" id="keep_alive" /> {$lng->remember_me}
+			</label>
+		</p>
+		{$join_recaptcha}
+		<button class="btn btn-primary" type="submit">{$lng->user_cp_login}</button>
+		<a href="{$list_url}/{$url_helper_a}lost_pw{$url_tail}" class="btn btn-secondary">{$lng->lost_pw_set_new}</a>
+    </fieldset>
+</form>

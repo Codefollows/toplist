@@ -1,0 +1,32 @@
+
+<div id="2step_google" {$2step_google_info_hide}>
+
+	Offical google authenticator on <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">Play store for Android</a> and <a href="https://itunes.apple.com/us/app/google-authenticator/id388497605" target="_blank">Itunes store for IOS</a>
+	<br /><br />
+	
+	{$lng->2step_google_info}
+	<br /><br />
+
+	<strong>{$2step_secret}</strong><br />
+	<img src="{$2step_qr_code}" alt="" />
+
+	{$form_2step_validate}
+	{$lng->2step_google_validate}
+</div>
+
+<script type="text/javascript">
+	jQuery(function($) {
+
+		// validate signup form on keyup and submit
+		$('#2step').on('change', function() {
+		
+			if ($(this).val() == 2) {
+				$('#2step_google').slideDown('slow');
+			}
+			else {
+				$('#2step_google').slideUp('slow');
+			}
+			
+		});
+	});
+</script>

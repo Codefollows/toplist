@@ -1,0 +1,43 @@
+
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['', '{$lng->g_out}', '{$lng->g_in}'],
+          ['{$lng->g_this_month}',  {$tot_out_0_monthly},      {$tot_in_0_monthly}],
+          ['{$lng->g_last_month}',  {$tot_out_1_monthly},      {$tot_in_1_monthly}],
+          ['..',  {$tot_out_2_monthly},      {$tot_in_2_monthly}],
+          ['..',  {$tot_out_3_monthly},      {$tot_in_3_monthly}]
+        ]);
+
+
+
+        // Set chart options
+        var options = {
+                       'width':600,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+<div>{$lng->user_cp_premium_membership}: {$remain_day_premium}</div>
+
+<div id="chart_div"></div>
+

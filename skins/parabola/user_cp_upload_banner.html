@@ -1,0 +1,50 @@
+
+<script type="text/javascript">
+    function onSubmitButton(){
+        document.getElementById("submitButtonDiv").style.display = "none";    
+    
+        if (navigator.appName == "Microsoft Internet Explorer") {
+            document.getElementById("progressBar").innerHTML = "";
+            document.getElementById("progressBar").style.display = "block";
+            document.getElementById("progressBar").innerHTML = "<img src=\'images/progressbar.gif\' alt=\'Progress Bar\'>";
+        } else {
+            document.getElementById("progressBar").style.display = "block";        
+        }
+    }
+</script>
+
+<form action="" method="post" enctype="multipart/form-data" id="user_cp_upload_banner" onsubmit="return onSubmitButton()">
+
+	{$csrf_token}
+
+    <fieldset>
+
+        <div>
+            <select name="site">
+                {$user_cp_upload_sites}
+            </select>
+        </div>
+	    {$lng->user_cp_banner_max_size}: {$user_cp_upload_max_size}<br />
+	    {$lng->user_cp_banner_max_width}: {$user_cp_upload_max_width}<br />
+	    {$lng->user_cp_banner_max_height}: {$user_cp_upload_max_height}<br /><br />
+
+        <div>
+            {$user_cp_upload_success}
+            {$user_cp_upload_filesize}
+
+            {$user_cp_upload_errors}
+        </div>
+
+        <div>
+            <input type="file" name="image" class="in1" />
+        </div>
+
+ 	    <div id="submitButtonDiv">
+            <input type="submit" name="submit" class="button1" value="Upload File" />
+        </div>
+        <div id="progressBar" style="display:none">
+            <img src="images/progressbar.gif" alt="Progress Bar">
+        </div>
+
+    </fieldset>
+</form>

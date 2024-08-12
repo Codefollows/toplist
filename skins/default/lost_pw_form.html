@@ -1,0 +1,12 @@
+
+<form action="{$list_url}/{$url_helper_a}lost_pw{$url_tail}" method="post">
+    <fieldset>
+        <legend>{$lng->lost_pw_header}</legend>
+        <p>
+            <label for="lost_pw_username">{$lng->g_username}</label>
+            <input type="text" name="u" class="form-control" id="lost_pw_username" />
+        </p>
+        {$join_recaptcha}
+        <input type="submit" name="submit" class="btn btn-primary" value="{$lng->lost_pw_set_new}">
+    </fieldset>
+</form>

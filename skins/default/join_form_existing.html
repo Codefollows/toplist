@@ -1,0 +1,130 @@
+
+
+<script type="text/javascript">
+$( document ).ready(function() {
+
+	// validate signup form on keyup and submit
+	$("#signupForm").validate({
+		rules: {
+			u: "required",
+			url: "required",
+			title: "required",
+			username: {
+				required: true,
+				minlength: 2
+			},
+			email: {
+				required: true,
+				email: true
+			}
+        },
+
+
+   errorElement: 'span',
+    errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+    },
+
+
+
+		messages: {
+			u: "{$lng->join_error_username}",
+			url: "{$lng->join_error_url}",
+			title: "{$lng->join_error_title}",
+			username: {
+				required: " ",
+				minlength: " "
+			},
+
+			email: "{$lng->join_error_email}"
+		}
+	});
+
+
+
+
+
+});
+</script>
+
+
+
+<p class="{$error_style_top}">{$error_top}</p>
+
+<form action="{$list_url}/index.php?a=user_cpl&amp;b=join_existing" method="post" name="join_form" id="signupForm">
+
+	{$csrf_token}
+
+<div id="regform" style="display: block">
+
+	<input type="hidden" name="ownerbox" value="{$owner_username}">
+	<input type="hidden" name="password" value="{$rnd_password}">
+	<input type="hidden" name="confirm_password" value="{$rnd_password}" />
+	<input type="hidden" name="u" size="20" value="{$owner_username}-{$rand}" />
+
+    <fieldset>
+      <legend>{$lng->join_website}</legend>
+      <div class="row">
+        <div class="col">
+
+            <div class="form-group">
+                <label for="join_url">{$lng->g_url}</label>
+                <input type="text" name="url" value="{$url}" id="join_url" class="form-control {$error_style_url}" placeholder="http://" />
+                {$error_url}
+            </div>
+
+            <div class="form-group">
+                <label for="join_title">{$lng->g_title}</label>
+                <input type="text" name="title" value="{$title}" id="join_title"  class="form-control {$error_style_title}"/>
+                {$error_title}
+            </div>
+
+            <div class="form-group">
+            <label for="join_description">{$lng->g_description}</label>
+                <textarea cols="50" rows="5" name="description" id="join_description" class="form-control">{$description}</textarea>
+            </div>
+
+            <div class="form-group">
+            <label for="join_category">{$lng->g_category}</label>
+                {$categories_menu}
+            </div>
+
+            <div class="form-group">
+                <label for="join_email">{$lng->g_email}</label>
+                <input type="text" name="email" value="{$email}" id="join_email" class="form-control {$error_style_email}" />
+                {$error_email}
+            </div>
+
+            <div class="form-group">
+            	<label for="unsubscribe"><input type="checkbox" name="unsubscribe" size="50" value="1" id="unsubscribe" {$unsubscribe_checked}/> {$lng->user_cp_unsubscribe}</label>
+            </div>
+
+        </div>
+        <div class="col">
+            {$join_captcha}
+            {$join_recaptcha}
+            {$join_question}
+            {$join_security_extra}
+        </div>
+
+      </div>
+
+        <div>
+            <div id="capbag"> </div>
+            <div id="capops"> </div>
+        </div>
+        <div id="submitButtonDiv">
+            <button class="btn btn-primary" name="submit" type="submit">{$lng->join_header}</button>
+        </div><br>
+
+    </fieldset>
+
+</div>
+</form>

@@ -1,0 +1,38 @@
+Options +FollowSymLinks -Indexes
+RewriteEngine on
+
+################ Require ending trailing slash
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
+RewriteRule ^(.*)$ %{REQUEST_URI}/ [R=301,L]
+
+################ Beautify dynamic url sets
+RewriteRule ^join/ index.php?a=join [L]
+RewriteRule ^user_cpl/ index.php?a=user_cpl [L]
+RewriteRule ^stats/(.*)/ index.php?a=stats&u=$1 [L]
+RewriteRule ^stats/ index.php?a=stats [L]
+RewriteRule ^details/(.*)/ index.php?a=details&u=$1 [L]
+RewriteRule ^overall-stats/ index.php?a=details [L] 
+RewriteRule ^lost_pw/ index.php?a=lost_pw [L]
+RewriteRule ^review/(.*)/ index.php?a=rate&u=$1 [L]
+RewriteRule ^reviews/(.*)/ index.php?a=details&u=$1&all_reviews=1 [L]
+
+RewriteRule ^category/(.*)/ index.php?cat=$1 [L]
+
+RewriteRule ^rank/(.*)/(.*)/category/(.*)/ index.php?p=$1&method=$2&cat=$3 [L]
+RewriteRule ^rank/(.*)/category/(.*)/ index.php?method=$1&cat=$2 [L]
+RewriteRule ^rank/(.*)/(.*)/ index.php?p=$1&method=$2 [L]
+RewriteRule ^rank/(.*)/ index.php?method=$1 [L]
+
+RewriteRule ^search/(.*)/(.*)/ index.php?a=search&p=$1&q=$2 [L]
+RewriteRule ^search/(.*)/ index.php?a=search&q=$1 [L]
+RewriteRule ^search/ index.php?a=search [L]
+
+RewriteRule ^page/(.*)/ index.php?a=page&id=$1 [L]
+
+
+################ Disable cache for html pages, due certain features require live updates
+<FilesMatch ".(html|htm|php)$">
+Header set Cache-Control "max-age=0, private, proxy-revalidate"
+</FilesMatch>

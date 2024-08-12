@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>{$lng->gateway_header}</title>
+	<base href="{$list_url}">
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<meta name="description" content="{$meta_description}">
+	<meta name="keywords" content="{$meta_keywords}">
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="js/validate.js"></script>
+	{$header_js_files}
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link rel="stylesheet" href="{$skins_url}/{$skin_name}/fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="{$skins_url}/{$skin_name}/screen.css">
+	{$css_styles}	
+	<link rel="stylesheet" href="{$skins_url}/{$skin_name}/user.css">
+
+    <!--[if IE 9]>
+    <style type="text/css">
+        textarea, input { filter: none; }
+    </style>
+    <![endif]-->
+
+	<style>
+		.g-recaptcha {
+			display: inline-block;
+		}
+	</style>
+</head>
+<body>
+	<div class="container wrap text-center py-5">
+		<h1>{$lng->gateway_header}</h1>
+
+		<div id="gateway-top">{$gateway_top}</div>
+
+		<p class="gatemessage">{$lng->gateway_text}</p>
+
+		<form method="post" action="{$list_url}/index.php?a=in&amp;u={$username}&amp;sid={$sid}">
+			{$join_recaptcha}
+			<a href="{$list_url}/" class="btn btn-danger"><span><i class="fas fa-times-circle"></i> {$lng->gateway_no_vote}</span></a> 
+			<button type="submit" class="btn btn-success">{$lng->gateway_vote}</button>
+		</form>
+
+		<p style="margin:30px 0;">{$url} - {$description}</p>
+		
+		{$screenshot}<br>
+		
+		{$banner}
+
+		<div id="gateway-bottom py-5">{$gateway_bottom}</div>
+	</div>
+	
+	{$footer_js_files}
+
+	{$extra_javascripts}	
+</body>
+</html>

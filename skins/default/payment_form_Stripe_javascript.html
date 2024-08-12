@@ -1,0 +1,32 @@
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+	document.getElementById('checkout').addEventListener('checkout-submit', e => {
+					
+		const target   = e.target;			
+		const provider = e.detail.provider;
+		const response = e.detail.response;
+		
+		if (provider === 'Stripe') {
+
+			const stripe = Stripe('{$Stripe_api_public_key}');
+
+			stripe.redirectToCheckout({
+
+				sessionId: response.session_id
+
+			}).then(result => {
+
+				// browser or network error
+				if (result.error) {
+				
+					alert(result.error.message);
+					
+					target.disabled = false;
+					target.querySelector('.svg-waiting').style.display = 'none';
+					target.querySelector('span').textContent = 'Checkout';
+				}
+			});
+		}
+	});
+</script>

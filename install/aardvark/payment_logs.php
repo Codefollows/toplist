@@ -1,0 +1,33 @@
+<?php
+
+$DB->query("CREATE TABLE `{$CONF['sql_prefix']}_payment_logs` (
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	`txn_id` varchar(255) NOT NULL,
+	`provider` varchar(255) NOT NULL,
+	`completed_once` tinyint(3) unsigned NOT NULL DEFAULT 0,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`status` varchar(255) NOT NULL,
+	`status_reason` text DEFAULT NULL,
+	`username` varchar(255) DEFAULT NULL,
+	`cheat` tinyint(3) unsigned NOT NULL DEFAULT 0,
+	`cheat_reason` varchar(255) DEFAULT NULL,
+	`service` varchar(255) NOT NULL,
+	`service_info` text DEFAULT NULL,
+	`price` decimal(10,2) NOT NULL DEFAULT 0.00,
+	`discount` decimal(10,2) NOT NULL DEFAULT 0.00,
+	`payed` decimal(10,2) NOT NULL DEFAULT 0.00,
+	`fee` decimal(10,2) NOT NULL DEFAULT 0.00,
+	`payment_date` timestamp NULL DEFAULT NULL,
+	`email` varchar(255) DEFAULT NULL,
+	`country` varchar(255) NOT NULL DEFAULT 'N/A',
+	`country_code` varchar(255) NOT NULL DEFAULT 'N/A',
+	`state` varchar(255) NOT NULL DEFAULT 'N/A',
+	`city` varchar(255) NOT NULL DEFAULT 'N/A',
+	`street` varchar(255) NOT NULL DEFAULT 'N/A',
+	`zip` varchar(255) NOT NULL DEFAULT 'N/A',
+	`fname` varchar(255) NOT NULL DEFAULT 'N/A',
+	`lname` varchar(255) NOT NULL DEFAULT 'N/A',
+	PRIMARY KEY (`id`),
+	INDEX `username` (`username`),
+	INDEX `txn_id` (`txn_id`)
+)CHARACTER SET utf8 COLLATE utf8_unicode_ci", __FILE__, __LINE__);

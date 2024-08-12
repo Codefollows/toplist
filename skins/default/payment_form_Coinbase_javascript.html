@@ -1,0 +1,13 @@
+
+<script>
+	document.getElementById('checkout').addEventListener('checkout-submit', e => {
+					
+		const target   = e.target;			
+		const provider = e.detail.provider;
+		const response = e.detail.response;
+		
+		if (provider === 'Coinbase') {
+			window.location = response.redirect;
+		}
+	});
+</script>
